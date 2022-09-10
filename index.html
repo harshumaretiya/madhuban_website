@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="images/madhuvan_logo.png" type="image/png">
+  <link href="./css/tailwind.css" rel="stylesheet">
+  <link href="./assets/aos.css" rel="stylesheet">
+  <link href="css/style1.scss" >
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+  <script type="text/javascript" src="assets/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/aos.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2? family=Poppins:wght@600&display=swap');
+
+    html {
+    scroll-behavior: smooth;
+    }
+
+    #journal-scroll::-webkit-scrollbar {
+      width: 4px;
+      cursor: pointer;
+      /*background-color: rgba(229, 231, 235, var(--bg-opacity));*/
+    }
+
+    #journal-scroll::-webkit-scrollbar-track {
+      background-color: rgba(229, 231, 235, var(--bg-opacity));
+      cursor: pointer;
+      /*background: red;*/
+    }
+
+    #journal-scroll::-webkit-scrollbar-thumb {
+      cursor: pointer;
+      background-color: #2880f1;
+      /*outline: 1px solid slategrey;*/
+    }
+
+    @media(max-width:1520px) {
+      .left-svg {
+        display: none;
+      }
+    }
+
+    /* small css for the mobile nav close */
+    #nav-mobile-btn.close span:first-child {
+      transform: rotate(45deg);
+      top: 4px;
+      position: relative;
+      background: #a0aec0;
+    }
+
+    #nav-mobile-btn.close span:nth-child(2) {
+      transform: rotate(-45deg);
+      margin-top: 0px;
+      background: #a0aec0;
+    }
+
+    .item {
+      width: 200px;
+      height: 200px;
+      margin: 50px auto;
+      padding-top: 75px;
+      background: rgba(255, 85, 0, .7);
+      text-align: center;
+      color: #4E4C48;
+      font-size: 1.5em;
+    }
+    .glow-on-hover {
+    /* width: 220px; */
+    /* height: 50px; */
+    border: none;
+    outline: none;
+    color: rgb(251, 251, 251);
+    background: rgb(42 69 202 / 60%);
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    }
+
+    .glow-on-hover:before {
+      content: '';
+      background: linear-gradient(45deg, #dbb7b7, #ddcd86, #fffb00, #98e779, #00ffd5, #da82c7, #e6b7d4);
+      position: absolute;
+      top: -2px;
+      left:-2px;
+      background-size: 400%;
+      z-index: -1;
+      filter: blur(5px);
+      width: calc(100% + 4px);
+      height: calc(100% + 4px);
+      animation: glowing 20s linear infinite;
+      opacity: 0;
+      transition: opacity .3s ease-in-out;
+      border-radius: 10%;
+    }
+
+    .glow-on-hover:active {
+        color: #000
+    }
+
+    .glow-on-hover:active:after {
+        background: transparent;
+    }
+
+    .glow-on-hover:before {
+        opacity: 1;
+    }
+
+    .glow-on-hover:after {
+      z-index: -1;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgb(113, 103, 250);
+      left: 0;
+      top: 0;
+      border-radius: 5px;
+    }
+
+    @keyframes glowing {
+      0% { background-position: 0 0; }
+      50% { background-position: 400% 0; }
+      100% { background-position: 0 0; }
+    }
+
+    .filter-switch label {
+      cursor: pointer;
+    }
+    .filter-switch-item input:checked + label {
+      color: inherit;
+    }
+    .filter-switch-item input:not(:checked) + label {
+      --bg-opacity: 0;
+      box-shadow: none;
+    }
+
+    .footer-ul { 
+     
+      list-style: none; 
+      display: table;
+      text-align: left;
+    }
+    .footer-li { 
+     
+      position: relative; 
+      
+    }
+    .footer-a {
+
+      text-transform: uppercase;
+      text-decoration: none;
+      letter-spacing: 0.015em;
+      
+      display: inline-block;
+      padding: 3px 7px;
+      position: relative;
+    }
+    .footer-a:after {    
+      background: none repeat scroll 0 0 transparent;
+      bottom: 0;
+      content: "";
+      display: block;
+      height: 2px;
+      left: 50%;
+      position: absolute;
+      background: rgb(3, 3, 3);
+      transition: width 0.3s ease 0s, left 0.3s ease 0s;
+      width: 0;
+    }
+    .footer-a:hover:after { 
+      width: 100%; 
+      left: 0; 
+    }
+    @media screen and (max-height: 300px) {
+      .footer-ul {
+        margin-top: 40px;
+      }
+    }
+  #myBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 12px;
+    z-index: 99;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 17px;
+    opacity: 0.5;
+    background-image: linear-gradient(rgb(74, 74, 190), rgb(179, 91, 241));
+  }
+
+
+
+  .flip {
+  width: 150px;
+  height: 64px;   
+  text-align: center;
+  perspective: 600px;  
+  
+}
+.flip-content {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s;
+  transform-style: preserve-3d;
+  
+}
+.flip:hover .flip-content {
+  transform: rotateY(180deg);
+  transition: transform 0.3s;
+  
+}
+.flip-front, .flip-back {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  line-height: 64px;
+  backface-visibility: hidden;  
+  
+}
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+  </style>
+</head>
+
+  <body class="overflow-x-hidden antialiased">
+    <!--Top button Start-->
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><img src="images/up-arrow.svg" style="width: 30px;"></button>
+    <!--Top button End -->
+
+    <!-- Header Section -->
+    <header class="relative z-50 w-full h-24">
+      <div class="container flex items-center justify-center h-full max-w-6xl pr-20 mx-auto sm:justify-between xl:px-0">
+        <a href="#" class="relative flex items-center inline-block h-full font-black leading-none sm:ml-2">
+          <img class="w-auto h-20 text-indigo-600 fill-current" src="images/madhuban_infotech.png" />
+          <!-- <span class="ml-1 text-3xl md:text-2xl text-gray-800 font-serif text-indigo-700 italic">Madhuban InfoTech<span class="text-pink-500"></span></span> -->
+        </a>
+        <nav id="nav" class="absolute top-0 left-0 z-50 flex flex-col items-center pb-24 justify-between hidden w-full h-64 pt-5 mt-24 text-sm text-gray-800 bg-white border-t border-gray-200 md:w-auto md:flex-row md:h-24 lg:text-base md:bg-transparent md:mt-0 md:border-none md:py-0 md:flex md:relative">
+          <a href="index.html" class="ml-0 mr-0 font-bold duration-100 md:ml-12 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Home</a>
+          <a href="#about_us" class="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">About Us</a>
+          <a href="#services" class="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Services</a>
+          <a href="#secure_contact" class="mr-0 font-bold duration-100 transition-color text-black hover:text-indigo-600 md:hidden lg:hidden xl:hidden ">Contact Us</a>
+        </nav>
+        <div class="absolute left-0 flex-col items-center justify-center hidden w-full pb-8 mt-48 border-b border-gray-200 md:relative md:w-auto md:bg-transparent md:border-none md:mt-0 md:flex-row md:p-0 md:items-end md:flex md:justify-between">
+          <!-- <a href="#_" class="relative z-40 px-3 py-2 mr-0 text-sm font-bold text-pink-500 md:px-5 lg:text-white sm:mr-3 md:mt-0">Blogs</a> -->
+          <a href="mailto:contact@madhubaninfotech.in" class="relative z-40 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-white transition-all transition duration-100 duration-300 bg-indigo-700 rounded shadow-md fold-bold lg:bg-white lg:text-indigo-700 sm:w-full lg:shadow-none hover:shadow-xl">Contact Us</a>
+          <svg class="absolute top-0 left-0 hidden w-screen max-w-3xl -mt-64 -ml-12 lg:block" viewBox="0 0 818 815" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs>
+              <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="c">
+                <stop stop-color="#E614F2" offset="0%" />
+                <stop stop-color="#FC3832" offset="100%" />
+              </linearGradient>
+              <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="f">
+                <stop stop-color="#657DE9" offset="0%" />
+                <stop stop-color="#1C0FD7" offset="100%" />
+              </linearGradient>
+              <filter x="-4.7%" y="-3.3%" width="109.3%" height="109.3%" filterUnits="objectBoundingBox" id="a">
+                <feOffset dy="8" in="SourceAlpha" result="shadowOffsetOuter1" />
+                <feGaussianBlur stdDeviation="8" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
+                <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0" in="shadowBlurOuter1" />
+              </filter>
+              <filter x="-4.7%" y="-3.3%" width="109.3%" height="109.3%" filterUnits="objectBoundingBox" id="d">
+                <feOffset dy="8" in="SourceAlpha" result="shadowOffsetOuter1" />
+                <feGaussianBlur stdDeviation="8" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
+                <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0" in="shadowBlurOuter1" />
+              </filter>
+              <path
+                d="M160.52 108.243h497.445c17.83 0 24.296 1.856 30.814 5.342 6.519 3.486 11.635 8.602 15.12 15.12 3.487 6.52 5.344 12.985 5.344 30.815v497.445c0 17.83-1.857 24.296-5.343 30.814-3.486 6.519-8.602 11.635-15.12 15.12-6.52 3.487-12.985 5.344-30.815 5.344H160.52c-17.83 0-24.296-1.857-30.814-5.343-6.519-3.486-11.635-8.602-15.12-15.12-3.487-6.52-5.343-12.985-5.343-30.815V159.52c0-17.83 1.856-24.296 5.342-30.814 3.486-6.519 8.602-11.635 15.12-15.12 6.52-3.487 12.985-5.343 30.815-5.343z"
+                id="b" />
+              <path
+                d="M159.107 107.829H656.55c17.83 0 24.296 1.856 30.815 5.342 6.518 3.487 11.634 8.602 15.12 15.12 3.486 6.52 5.343 12.985 5.343 30.816V656.55c0 17.83-1.857 24.296-5.343 30.815-3.486 6.518-8.602 11.634-15.12 15.12-6.519 3.486-12.985 5.343-30.815 5.343H159.107c-17.83 0-24.297-1.857-30.815-5.343-6.519-3.486-11.634-8.602-15.12-15.12-3.487-6.519-5.343-12.985-5.343-30.815V159.107c0-17.83 1.856-24.297 5.342-30.815 3.487-6.519 8.602-11.634 15.12-15.12 6.52-3.487 12.985-5.343 30.816-5.343z"
+                id="e" />
+            </defs>
+            <g fill="none" fill-rule="evenodd" opacity=".9">
+              <g transform="rotate(65 416.452 409.167)">
+                <use fill="#000" filter="url(#a)" xlink:href="#b" />
+                <use fill="url(#c)" xlink:href="#b" />
+              </g>
+              <g transform="rotate(29 421.929 414.496)">
+                <use fill="#000" filter="url(#d)" xlink:href="#e" />
+                <use fill="url(#f)" xlink:href="#e" />
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div id="nav-mobile-btn"
+          class="absolute top-0 right-0 z-50 block w-6 mt-8 mr-10 cursor-pointer select-none md:hidden sm:mt-10">
+          <span class="block w-full h-1 mt-2 duration-200 transform bg-gray-800 rounded-full sm:mt-1"></span>
+          <span class="block w-full h-1 mt-1 duration-200 transform bg-gray-800 rounded-full"></span>
+        </div>
+      </div>
+    </header>
+    <!-- End Header Section-->
+
+    <!-- BEGIN HERO SECTION -->
+    <div class="relative items-center justify-center w-full overflow-x-hidden lg:pt-40 lg:pb-40 xl:pt-40 xl:pb-72">
+      <div
+        class="container flex flex-col items-center justify-between h-full max-w-6xl px-8 mx-auto -mt-32 lg:flex-row xl:px-0">
+        <div
+          class="z-30 flex flex-col items-center w-full max-w-xl pt-48 text-center lg:items-start lg:w-1/2 lg:pt-20 xl:pt-40 lg:text-left">
+          <h1 class="relative mb-4 text-3xl font-black leading-tight text-gray-900 sm:text-6xl xl:mb-8">Build the
+            Next
+            Great Thing with Us.</h1>
+          <p class="pr-0 mb-8 text-base text-gray-600 sm:text-lg xl:text-xl lg:pr-20">Are you ready to start your
+            adventure and start building the next greatest SAAS app in the market?</p>
+          <a href="mailto:contact@madhubaninfotech.in" class="relative self-start inline-block w-auto px-8 py-4 mx-auto mt-0 text-base font-bold text-white bg-indigo-600 border-t border-gray-200 rounded-md shadow-xl sm:mt-1 fold-bold lg:mx-0" style="background-image: linear-gradient(rgb(74, 74, 190), rgb(179, 91, 241));">
+            Schedule Meeting Today!
+          </a>
+          <!-- Integrates with section -->
+          <div class="flex-col hidden mt-12 sm:flex lg:mt-24">
+            <p class="mb-4 text-sm font-medium tracking-widest text-gray-500 uppercase">Integrates With</p>
+            <div class="flex">
+              <svg
+                class="h-8 mr-4 text-gray-500 duration-150 cursor-pointer fill-current transition-color hover:text-gray-600"
+                viewBox="0 0 2499 1037" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="none" stroke-width="1">
+                  <g>
+                    <path
+                      d="M261.062 466.768c-53.833-19.912-83.335-35.399-83.335-59.735 0-20.652 16.963-32.45 47.201-32.45 55.31 0 112.09 21.388 151.178 40.559l22.124-136.427c-30.973-14.752-94.397-39.088-182.151-39.088-61.947 0-113.573 16.223-150.443 46.46-38.352 31.71-58.263 77.434-58.263 132.744 0 100.293 61.211 143.07 160.769 179.203 64.159 22.86 85.547 39.088 85.547 64.16 0 24.336-20.652 38.346-58.263 38.346-46.46 0-123.153-22.86-173.302-52.356L0 786.087c42.771 24.337 122.417 49.409 205.017 49.409 65.63 0 120.204-15.487 157.08-44.984 41.293-32.45 62.682-80.381 62.682-142.328 0-102.511-62.683-145.282-163.717-181.416zm523.877-80.387l22.124-135.692H690.265V85.966l-157.035 25.84-22.677 138.883-55.232 8.96-20.675 126.732h75.68v266.227c0 69.32 17.7 117.257 53.833 146.754 30.238 24.336 73.745 36.134 134.956 36.134 47.196 0 75.957-8.109 95.868-13.275V678.416c-11.062 2.953-36.133 8.114-53.097 8.114-36.134 0-51.62-18.435-51.62-60.47V386.38h94.673zm350.752-143.618c-51.62 0-92.92 27.102-109.142 75.775l-11.062-67.849H855.459v573.745h182.887V452.017c22.865-28.026 55.31-38.159 99.558-38.159 9.59 0 19.911 0 32.45 2.213V247.188c-12.539-2.948-23.6-4.425-34.663-4.425zm171.095-48.86c53.098 0 95.869-43.507 95.869-96.604 0-53.839-42.771-96.61-95.869-96.61-53.838 0-96.609 42.771-96.609 96.61 0 53.097 42.771 96.604 96.61 96.604zm-92.184 56.786h183.628v573.745h-183.628V250.689zm703.999 51.62c-32.45-42.035-77.434-62.682-134.956-62.682-53.097 0-99.558 22.124-143.07 68.584l-9.585-57.522h-160.769v786.134l182.893-30.232V822.22c28.02 8.85 56.78 13.275 82.594 13.275 45.725 0 112.096-11.798 163.717-67.843 49.408-53.839 74.485-137.168 74.485-247.052 0-97.345-18.44-171.09-55.31-218.291zm-151.92 353.983c-14.75 28.025-37.61 42.777-64.159 42.777-18.435 0-34.662-3.69-49.408-11.062V415.142c30.973-32.445 58.993-36.134 69.32-36.134 46.46 0 69.32 50.15 69.32 148.23 0 56.045-8.11 99.557-25.073 129.054zm731.566-123.894c0-91.443-19.912-163.717-59-214.602-39.822-51.62-99.557-78.169-175.514-78.169-155.608 0-252.212 115.044-252.212 299.408 0 103.247 25.808 180.68 76.692 230.089 45.725 44.248 111.361 66.372 196.168 66.372 78.169 0 150.442-18.435 196.167-48.673l-19.912-125.365c-44.989 24.336-97.345 37.61-156.344 37.61-35.398 0-59.734-7.378-77.434-22.864-19.175-16.223-30.237-42.771-33.921-80.382h303.097c.736-8.85 2.213-50.15 2.213-63.424zm-306.787-48.672c5.16-81.859 27.284-120.205 69.32-120.205 41.3 0 62.688 39.087 65.636 120.205H2191.46z" />
+                  </g>
+                </g>
+              </svg>
+              <svg
+                class="h-8 mr-4 text-gray-500 duration-150 cursor-pointer fill-current transition-color hover:text-gray-600"
+                viewBox="0 0 2350 2315" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="none" stroke-width="1"></g>
+                <g>
+                  <path
+                    d="M1175 0C525.8 0 0 525.8 0 1175c0 552.2 378.9 1010.5 890.1 1139.7-5.9-14.7-8.8-35.3-8.8-55.8v-199.8H734.4c-79.3 0-152.8-35.2-185.1-99.9-38.2-70.5-44.1-179.2-141-246.8-29.4-23.5-5.9-47 26.4-44.1 61.7 17.6 111.6 58.8 158.6 120.4 47 61.7 67.6 76.4 155.7 76.4 41.1 0 105.7-2.9 164.5-11.8 32.3-82.3 88.1-155.7 155.7-190.9-393.6-47-581.6-240.9-581.6-505.3 0-114.6 49.9-223.3 132.2-317.3-26.4-91.1-61.7-279.1 11.8-352.5 176.3 0 282 114.6 308.4 143.9 88.1-29.4 185.1-47 284.9-47 102.8 0 196.8 17.6 284.9 47 26.4-29.4 132.2-143.9 308.4-143.9 70.5 70.5 38.2 261.4 8.8 352.5 82.3 91.1 129.3 202.7 129.3 317.3 0 264.4-185.1 458.3-575.7 499.4 108.7 55.8 185.1 214.4 185.1 331.9V2256c0 8.8-2.9 17.6-2.9 26.4C2021 2123.8 2350 1689.1 2350 1175 2350 525.8 1824.2 0 1175 0z" />
+                </g>
+              </svg>
+              <svg
+                class="h-8 mr-4 text-gray-500 duration-150 cursor-pointer fill-current transition-color hover:text-gray-600"
+                viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="none" stroke-width="1">
+                  <g transform="translate(-401 -701)">
+                    <g transform="translate(-293 -236)">
+                      <g transform="translate(463 909)">
+                        <g transform="translate(0 28)">
+                          <g transform="translate(229.885)">
+                            <path
+                              d="M242.088 0c-36.478.027-66 29.582-65.973 66-.027 36.418 29.522 65.973 66 66h66V66.027C308.142 29.608 278.593.054 242.088 0c.027 0 .027 0 0 0zm.23 175H66.912c-36.365.027-65.824 29.576-65.797 65.987-.054 36.41 29.405 65.96 65.77 66.013h175.433c36.366-.027 65.824-29.576 65.797-65.987.027-36.437-29.431-65.986-65.797-66.013zM681.115 240.987c.027-36.411-29.522-65.96-66-65.987-36.478.027-66.027 29.576-66 65.987V307h66c36.478-.027 66.027-29.576 66-66.013zm-175 .214V65.772C506.142 29.506 476.614.054 440.13 0c-36.486.027-66.04 29.48-66.014 65.772v175.429c-.054 36.293 29.501 65.745 65.987 65.799 36.485-.027 66.04-29.48 66.013-65.8zM440.115 680c36.478-.027 66.027-29.582 66-66 .027-36.418-29.522-65.973-66-66h-66v66c-.027 36.392 29.522 65.946 66 66zm-.23-175h175.433c36.366-.027 65.824-29.576 65.797-65.987.054-36.41-29.404-65.96-65.77-66.013H439.912c-36.366.027-65.824 29.576-65.797 65.987-.027 36.437 29.405 65.986 65.77 66.013zM1.115 439c-.027 36.418 29.522 65.973 66 66 36.478-.027 66.027-29.582 66-66v-66h-66c-36.478.027-66.027 29.582-66 66zm175-.249v175.444c-.054 36.296 29.501 65.751 65.987 65.805 36.485-.027 66.04-29.482 66.013-65.778V438.805c.054-36.296-29.501-65.751-65.986-65.805-36.513 0-66.04 29.455-66.014 65.751 0 0 0 .027 0 0z" />
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <svg class="absolute left-0 max-w-md mt-24 -ml-64 left-svg" viewBox="0 0 423 423"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs>
+              <linearGradient x1="100%" y1="0%" x2="4.48%" y2="0%" id="linearGradient-1">
+                <stop stop-color="#5C54DB" offset="0%" />
+                <stop stop-color="#6A82E7" offset="100%" />
+              </linearGradient>
+              <filter x="-9.3%" y="-6.7%" width="118.7%" height="118.7%" filterUnits="objectBoundingBox" id="filter-3">
+                <feOffset dy="8" in="SourceAlpha" result="shadowOffsetOuter1" />
+                <feGaussianBlur stdDeviation="8" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
+                <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0" in="shadowBlurOuter1" />
+              </filter>
+              <rect id="path-2" x="63" y="504" width="300" height="300" rx="40" />
+            </defs>
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity=".9">
+              <g id="Desktop-HD" transform="translate(-39 -531)">
+                <g id="Hero" transform="translate(43 83)">
+                  <g id="Rectangle-6" transform="rotate(45 213 654)">
+                    <use fill="#000" filter="url(#filter-3)" xlink:href="#path-2" />
+                    <use fill="url(#linearGradient-1)" xlink:href="#path-2" />
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="relative z-50 flex flex-col items-end justify-center w-full h-full lg:w-1/2 ms:pl-10">
+          <div class="container relative left-0 w-full max-w-4xl lg:absolute xl:max-w-6xl lg:w-screen">
+            <img src="images/web_app.svg"
+              class="w-full h-auto mt-20 mb-20 ml-0 lg:mt-24 xl:mt-40 lg:mb-0 lg:h-full lg:-ml-12">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- HERO SECTION END -->
+
+    <!-- Intro Start-->
+    <section id="about_us" class="relative py-15">
+      <div class="pb-2 mb-16 mx-auto uppercase text-7xl text-center text-white " data-aos="flip-left" data-aos-duration="3000">
+        <h1 class="text-4xl lg:text-6xl text-blue-900 font-bold mt-4 font-poppins">who we are</h1>
+        <h6 class="text-xl lg:text-3xl text-black font-bold mt-2 mb-2 font-poppins">Webapp Development & Web Design Company</h6>
+      </div>
+      <div class="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20" style="height: 80px;">
+        <svg  xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0" >
+          <polygon class="text-white fill-current" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+      </div>
+      <div class="container mx-auto px-4">
+        <div class="items-center flex flex-wrap">
+          <div class="w-full md:w-4/12 ml-auto mr-auto px-4" data-aos="zoom-out-right" data-aos-duration="3000">
+            <img alt="..." class="max-w-full" src="images/img_1.svg"/>
+          </div>
+          <div class="w-full md:w-5/12 ml-auto mr-auto px-4">
+            <div class="md:pr-12">
+              <div class="text-indigo-900 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 mt-6 shadow-lg rounded-full bg-blue-300">
+                <i class="fas fa-rocket text-3xl"></i>
+              </div>
+              <h3 class="text-3xl font-semibold font-poppins">A growing company</h3>
+              <p class="mt-4 text-md leading-relaxed text-gray-600 font-poppins text-justify">
+                Madhuban Info tech, a web-app development company based in Rajkot, India. 
+                We tend to develop highly functional mobile and web apps that leverage the full capabilities of platforms and systems. We believe in developing a customized web applications which are tested extensively to give a bug-free and user-friendly experience to our clients.
+              </p>
+              <ul class="list-none mt-6">
+                <li class="py-2">
+                  <div class="flex items-top">
+                    <div>
+                      <span class="text-lg font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-900 bg-blue-300 mr-3"><i class="fas fa-fingerprint"></i></span>
+                    </div>
+                    <div>
+                      <h4 class="text-sm leading-relaxed text-gray-600 font-poppins text-justify">
+                        Our key focus has always been to provide valuable services to our clients that boost conversion rates and help them cement long-lasting relationships with their end-users. 
+                      </h4>
+                    </div>
+                  </div>
+                </li>
+                <li class="py-2">
+                  <div class="flex items-top">
+                    <div>
+                      <span class="text-lg font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-900 bg-blue-300 mr-3"><i class="fab fa-artstation"></i></span>
+                    </div>
+                    <div>
+                      <h4 class="text-sm leading-relaxed text-gray-600 font-poppins text-justify">
+                        We make sure that the technology we choose for your product provide solutions by utilising the full potential of mobile and web platforms.
+                      </h4>
+                    </div>
+                  </div>
+                </li>
+                <li class="py-2">
+                  <div class="flex items-top">
+                    <div>
+                      <span class="text-lg font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-900 bg-blue-300 mr-3"><i class="far fa-paper-plane"></i></span>
+                    </div>
+                    <div>
+                      <h4 class="text-sm leading-relaxed text-gray-600 font-poppins text-justify">
+                        We believe that you will get solution of your all requirements at one place. 
+                        That mainly incorporate Web Design, Web App Development, Mobile apps development, Digital Marketing and Ecommerce. That's not the limit, all your web applications will get free security testing which means your web application will be completely free from OWASP top 10 vulnerabilities.
+                      </h4>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Intro End-->
+
+    <!--services start-->
+    <section id="services" class="pt-20 pb-1" style="background-image: url('images/bg-2.svg');">
+      <div class="p-4 mx-auto uppercase text-center text-blue-900 font-poppins text-4xl lg:text-6xl font-bold" data-aos="flip-left">
+      our services
+      </div>
+      <div class="container my-5 mx-auto px-4 md:px-12 bg-black-200 content-center rounded pt-4" >
+        <div class="flex-shrink-0">
+          <div class="col-span-1 gap-4">
+            <div class="container mx-auto">
+              <div class="flex flex-wrap -mx-4 m-6">
+                <div class="w-full h-90 sm:w-1/2 md:w-1/2 xl:w-1/3 p-4" data-aos="flip-left">
+                  <a href="#_" class="c-card block bg-white shadow-md hover:shadow-xl hover:bg-blue-100 rounded-lg overflow-hidden">
+                    <div class="relative pb-1 overflow-hidden">
+                      <img class="object-none object-center w-full h-60 inset-0"
+                        src="images/static_website.svg"
+                        alt="">
+                    </div>
+                    <div class="p-4">
+                      <span class="inline-block py-1 leading-6.5 ml-3 mr-3 rounded-full text-2xl uppercase tracking-wide text-indigo-500 font-semibold font-poppins">website design</span>
+                      <p class="block m-3 text-md leading-tight text-gray-600 font-poppins text-justify">
+                        We help you design smooth, highly responsive and mobile-friendly web applications. 
+                        We give you the hedge over your competitor for success by creating simple yet competitive website website.
+                        We use modern frameworks to enable faster development of elements, powerful features, responsive websites, mobility and layouts.
+                        We take the time to understand the trends of your business carefully and then create a perfect website design for your business that meets the needs of your business.</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="w-full h-90 sm:w-1/2 md:w-1/2 xl:w-1/3 p-4" data-aos="flip-left">
+                  <a href="#_" class="c-card block bg-white shadow-md hover:shadow-xl hover:bg-blue-100 rounded-lg overflow-hidden">
+                    <div class="relative pb-1 overflow-hidden">
+                      <img class="object-none object-center w-full h-60 inset-0" src="images/atesting_1.svg" alt="">
+                    </div>
+                    <div class="p-4">
+                      <span class="inline-block py-1 leading-6.5 ml-3 mr-3 rounded-full text-2xl uppercase tracking-wide text-indigo-500 font-semibold font-poppins">android app development</span>
+                      <p class="block m-3 text-md leading-tight text-gray-600 font-poppins text-justify">
+                        Android is fastest growing platform today and we have highly creative, skilled and experienced android development team, using latest tools and technology to build apps. 
+                        We design and develop advanced mobile applications and solutions to help our clients capitalize on the opportunities of the mobile revolution.To develop a successful android app, a robust and fail-proof mobile app development process is required. Our goal is to create opportunities for android developers to design and construct unique and powerful applications.
+                      </p>
+                    </div>
+                  </a>
+                </div>
+                <div class="w-full h-90 sm:w-1/2 md:w-1/2 xl:w-1/3 p-4" data-aos="flip-left">
+                  <a href="#_" class="c-card block bg-white shadow-md hover:shadow-xl hover:bg-blue-100 rounded-lg overflow-hidden">
+                    <div class="relative pb-1 overflow-hidden">
+                      <img class="object-none object-center w-full h-60 inset-0"
+                        src="images/website.svg"
+                        alt="">
+                    </div>
+                    <div class="p-4">
+                      <span class="inline-block py-1 leading-6.5 ml-3 mr-3  rounded-full text-2xl uppercase tracking-wide text-indigo-500 font-semibold font-poppins">Web app development</span>
+                      <p class="block m-3 text-md leading-tight text-gray-600 font-poppins text-justify">
+                        We offer web development services for any kind of business or industry. We have built secure web application solutions that align with customer’s business strategies and requirements.
+                        We provide skilled, professional & budget friendly web development services. Focused on collaborative approach, our team understands customers’ needs to unlock value, build next generation capabilities. 
+                        We tend to be skilled web development company giving big selection of web related services for tiny, medium and huge businesses.
+                      </p>
+                    </div>
+                  </a>
+                </div>
+                <div class="w-full h-90 sm:w-1/2 md:w-1/2 xl:w-1/3 p-4" data-aos="flip-left">
+                  <a href="#_" class="c-card block bg-white shadow-md hover:shadow-xl hover:bg-blue-100 rounded-lg overflow-hidden">
+                    <div class="relative pb-1 overflow-hidden">
+                      <img class="object-none object-center w-full h-60 inset-0"
+                        src="images/undraw_Mobile_application_mr4r.svg"
+                        alt="">
+                    </div>
+                    <div class="p-4">
+                      <span class="inline-block py-1 leading-6.5 ml-3 mr-3  rounded-full text-2xl uppercase tracking-wide text-indigo-500 font-semibold font-poppins">ios app development</span>
+                      <p class="block m-3 text-md leading-tight text-gray-600 font-poppins text-justify">
+                        We harness the latest technologies, tools, frameworks and SDKs to develop custom mobile apps for iPhone, iPad.
+                        At iPhone app development we are highly innovative & focused with right apps.
+                        We develop B2C apps from scratch, but we also have a unique know-how on implementing third-party solutions, libraries, API, custom and native UI, payment solutions which gives a best impact on your business and success in your business.
+                      </p>
+                    </div>
+                  </a>
+                </div>
+                <div class="w-full h-90 sm:w-1/2 md:w-1/2 xl:w-1/3 p-4" data-aos="flip-left">
+                  <a href="#_" class="c-card block bg-white shadow-md hover:shadow-xl hover:bg-blue-100 rounded-lg overflow-hidden">
+                    <div class="relative pb-1 overflow-hidden">
+                      <img class="object-none object-center w-full h-60 inset-0"
+                        src="images/testing_1.svg"
+                        alt="">
+                    </div>
+                    <div class="p-4">
+                      <span class="inline-block py-1 leading-6.5 ml-3 mr-3 rounded-full text-2xl uppercase tracking-wide text-indigo-500 font-semibold font-poppins">graphic design</span>
+                      <p class="block m-3 text-md leading-tight text-gray-600 font-poppins text-justify">
+                        We’re graphic design that is creative, responsive, fresh and tailor-made for you.
+                        It is the heart of a design. It blueprints the outline and workflow of the entire application. An incredible user interaction happens only with a brilliant UX.
+                        Graphic design is the special art that represents creative visual ideas, it is the practice of planning something different.
+                        From a custom logo design to a complete branding, our graphic design skills will blow your mind leaving you speechless.</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="w-full h-90 sm:w-1/2 md:w-1/2 xl:w-1/3 p-4" data-aos="flip-left">
+                  <a href="#_" class="c-card block bg-white shadow-md hover:shadow-xl hover:bg-blue-100 rounded-lg overflow-hidden">
+                    <div class="relative pb-1 overflow-hidden">
+                      <img class="object-none object-center w-full h-60 inset-0"
+                        src="images/undraw_pair_programming_njlp.svg"
+                        alt="">
+                    </div>
+                    <div class="p-4">
+                      <span class="inline-block py-1 leading-6.5 ml-3 mr-3  rounded-full text-2xl uppercase tracking-wide text-indigo-500 font-semibold font-poppins">wordpress development</span>
+                      <p class="block m-3 text-md leading-tight text-gray-600 font-poppins text-justify">
+                        Our WordPress development team is experienced and skilled in developing customized WordPress themes and plugins that can take your business to another level.
+                        And thus, help you develop any complex or simple feature that can be offered by this most user-friendly web development platform. We offer WordPress Installation and Setup, Theme Customization, Plugin Customization, Custom WordPress Theme Design, WordPress Widget Development and WordPress E-Commerce Sites.
+                      </p>
+                    </div>
+                  </a>
+                </div>
+                <div class="w-full h-90 sm:w-1/2 md:w-1/2 xl:w-1/3 p-4" data-aos="flip-left">
+                  <a href="#_" class="c-card block bg-white shadow-md hover:shadow-xl hover:bg-blue-100 rounded-lg overflow-hidden">
+                    <div class="relative pb-1 overflow-hidden">
+                      <img class="object-none object-center w-full h-60 inset-0"
+                        src="images/ecommarce_1.svg"
+                        alt="">
+                    </div>
+                    <div class="p-4">
+                      <span class="inline-block py-1 leading-6.5 ml-3 mr-3  rounded-full text-2xl uppercase tracking-wide text-indigo-500 font-semibold font-poppins">E-Commerce Website Development</span>
+                      <p class="block m-3 text-md leading-tight text-gray-600 font-poppins text-justify">
+                        eCommerce in an Internet Based Buying & Selling Platform wherein Buyer & Seller of Any Product meet Online. 
+                        We are having Experts in our Team who are Web Designers & Developers who have been working in these areas for many years and have good Knowledge & Experience. With our expertise your company is just a step away from being the biggest online seller, worldwide.
+                      </p>
+                    </div>
+                  </a>
+                </div>
+                <div class="w-full h-90 sm:w-1/2 md:w-1/2 xl:w-1/3 p-4" data-aos="flip-left">
+                  <a href="#_" class="c-card block bg-white shadow-md hover:shadow-xl hover:bg-blue-100 rounded-lg overflow-hidden">
+                    <div class="relative pb-1 overflow-hidden">
+                      <img class="object-none object-center w-full h-60 inset-0"
+                        src="images/web_app_pt.svg"
+                        alt="">
+                    </div>
+                    <div class="p-4">
+                      <span class="inline-block py-1 leading-6.5 ml-3 mr-3  rounded-full text-2xl uppercase tracking-wide text-indigo-500 font-semibold font-poppins">web application penetration testing</span>
+                      <p class="block m-3 text-md leading-tight text-gray-600 font-poppins text-justify">
+                        Applications are the favourite target of the attacker, and if the application is not gone through  penetration testing, then there are high chances of application's might running with vulnerabilties. 
+                        Using these vulnerabilities, it may lead to the massive user data breach. We go beyond looking at API and web vulnerabilities to examine the risk of the application on a mobile platform. 
+                      </p>
+                    </div>
+                  </a>
+                </div>
+                <div class="w-full h-90 sm:w-1/2 md:w-1/2 xl:w-1/3 p-4" data-aos="flip-left">
+                  <a href="#_" class="c-card block bg-white shadow-md hover:shadow-xl hover:bg-blue-100 rounded-lg overflow-hidden">
+                    <div class="relative pb-1 overflow-hidden">
+                      <img class="object-none object-center w-full h-60 inset-0"
+                        src="images/undraw_bug_fixing_oc7a.svg"
+                        alt="">
+                    </div>
+                    <div class="p-4">
+                      <span class="inline-block py-1 leading-6.5 ml-3 mr-3 rounded-full text-2xl uppercase tracking-wide text-indigo-500 font-semibold font-poppins">mobile application penetration testing</span>
+                      <p class="block m-3 text-md leading-tight text-graymd00 font-poppins text-justify">
+                        Public sector to private sectors today are using mobile apps to provide the best services to users. As the widespread use of mobile applications continues to grow, consumers and corporations find themselves facing new threats around privacy, insecure application integration, and device theft.
+                        We here find vulnerabilities in API, iOS and Android Platforms using our proven mobile application penetration testing methodology.
+                      </p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--Services end -->
+
+    <!-- Teck Stack Start-->
+    <section class="pt-16">
+      <div class="container my-5 mx-auto px-4 md:px-12 max-w-7xl">
+        <div class="p-4 mx-auto uppercase text-center text-black font-poppins text-4xl lg:text-6xl text-blue-900 font-bold" data-aos="flip-left">
+          Our Tech Stack
+          </div>
+        <div class="mt-1 mx-auto text-center">
+          <p class="pb-5 text-black text-xl text-black justify-center font-poppins">Explore 15+ tech stacks which makes your day-to-day workflow more efficient and familiar. Our extensive development work also strike your fan.</p>
+        </div>
+        <div class="flex flex-wrap" id="tabs-id">
+          <div class="w-full">
+            <ul class="flex gap-8 mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+              <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-purple-600" onclick="changeAtiveTab(event,'tab-backend')">
+                  <i class="fas fa-space-shuttle text-base mr-1"></i>  BackEnd
+                </a>
+              </li>
+              <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-black-600 bg-white" onclick="changeAtiveTab(event,'tab-frontend')">
+                  <i class="fas fa-cog text-base mr-1"></i>  FrontEnd
+                </a>
+              </li>
+              <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-black-600 bg-white" onclick="changeAtiveTab(event,'tab-database')">
+                  <i class="fas fa-briefcase text-base mr-1"></i>  Database
+                </a>
+              </li>
+              <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-black-600 bg-white" onclick="changeAtiveTab(event,'tab-cms')">
+                  <i class="fas fa-cubes text-base mr-1"></i>  CMS
+                </a>
+              </li>
+              <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-black-600 bg-white" onclick="changeAtiveTab(event,'tab-others')">
+                  <i class="fas fa-layer-group text-base mr-1"></i>  Other
+                </a>
+              </li>
+            </ul>
+            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded">
+              <div class="px-4 py-5 flex-auto">
+                <div class="tab-content tab-space">
+                  <div class="block" id="tab-backend">
+                    <div class="mt-6 flex flex-wrap max-w-8xl px-16 justify-center m-auto">
+                      <!--Ruby On Rails -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/ruby-lang-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Ruby On Rails</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Python -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/python-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Python</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- PHP -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/php-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">PHP</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Node Js-->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/nodejs-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Node JS</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Dot Net-->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/dotnet-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Dot Net</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Laravel -->
+                       <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/laravel-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Laravel</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Android -->
+                       <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/android-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Android</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Ios -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/apple-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">IOS</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="hidden" id="tab-frontend">
+                    <div class="mt-6 flex flex-wrap max-w-8xl px-16 justify-center m-auto">
+                      <!-- Angular JS -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                            <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                              <img class="" src="images/angular-icon.svg" />
+                            </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Angular JS</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- React JS -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                            <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                              <img class="" src="images/reactjs-icon.svg" />
+                            </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">React JS</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Bootstrap -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                            <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                              <img class="" src="images/getbootstrap-icon.svg" />
+                            </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Bootstrap</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Tailwind CSS -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                            <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                              <img class="" src="images/tailwindcss-icon.svg" />
+                            </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Tailwind</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Jquery -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                            <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                              <img class="" src="images/jquery-ar21.svg" />
+                            </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Jquery</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Adobe Illustrator -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                            <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                              <img class="" src="images/adobe_illustrator-icon.svg" />
+                            </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Adobe AI</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- JavaScript -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                            <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                              <img class="" src="images/javascript-icon.svg" />
+                            </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">JavaScript</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="hidden" id="tab-database">
+                    <div class="mt-6 flex flex-wrap max-w-8xl px-16 justify-center m-auto">
+                      <!-- MySQL -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/mysql-ar21.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">MySQL</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- MongoDB -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/MongoDB.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">MongoDB</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- PostgeSQL -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/PostageSQL.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">PostgeSQL</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Firebase -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/firebase-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Firebase</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Redis -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/redis-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Redis</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="hidden" id="tab-cms">
+                    <div class="mt-6 flex flex-wrap max-w-8xl px-16 justify-center m-auto">
+                      <!-- Wordpress -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/wordpress-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Wordpress</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Shopify -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/shopify-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Shopify</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="hidden" id="tab-others">
+                    <div class="mt-6 flex flex-wrap max-w-8xl px-16 justify-center m-auto">
+                      <!-- Heroku -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/heroku-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Heroku</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- AWS -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/amazon_aws-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">AWS</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Github -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/github-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Github</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- PostMan -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/getpostman-ar21.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">PostMan</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Stripe -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/stripe-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Stripe</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- SendGrid -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/sendgrid-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">SendGrid</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Trello -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/trello-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Trello</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Slack -->
+                      <div class="p-2 w-full md:w-1/4 lg:w-1/5 bg-gray-200 md:bg-white my-2 filter-database" data-aos="fade-up-right">
+                        <div class="flip">
+                          <div class="flip-content">
+                              <div class="flip-front transform w-full h-full flex justify-center items-center cursor-pointer transition duration-500 hover:scale-125">
+                                <img class="" src="images/slack-icon.svg" />
+                              </div>
+                            <div class="flip-back pl-4">
+                              <strong class="text-indigo-900 text-xl text-center">Slack</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Tech Stack End-->
+
+    <!-- How we works Start-->
+    <section>
+      <div class="bg-white text-white">
+        <div class="mx-auto">
+            <div class="md:pt-12 pt-12">
+              <div class="md:pb-8 pb-8 max-w-7xl mx-auto text-center ">
+                <div class="p-4 mx-auto uppercase text-center font-poppins text-4xl lg:text-6xl text-blue-900 font-bold" data-aos="flip-left">
+                  Our Working Process
+                  </div>
+                  <h2 class="text-black font-bold mb-4 mt-4 text-xl lg:text-3xl font-poppins">Pushing the boundaries of what's possible</h2>
+                  <p class="text-xl text-black justify-center m-4 font-poppins">
+                    Here we strive to keep developers innovative and our code bases thriving.
+                    We blend the understanding of our customer's request and deep user research & utilizing an agile software development approch, we build quality software in a remarkable duration, without compromising ingenuity.
+                  </p>
+                </div>
+              </div>
+            </div>
+        <div class="container mx-auto flex flex-col text-center md:flex-row md:mb-24" style="max-width: 76rem;">
+          <div class="-ml-6 md:ml-12 sticky">
+            <div class="container mx-auto w-full h-full">
+              <div class="relative wrap overflow-hidden p-10 h-full">
+                <div class="container">
+                  <div class="flex flex-col md:grid grid-cols-9 mx-auto p-2 text-blue-50">
+                    <!-- left -->
+                    <div class="flex flex-row-reverse md:contents">
+                      <div class="max-w-md py-4 bg-white col-start-1 col-end-5 p-4 rounded-xl my-10 lg:my-1 shadow-md">
+                        <div class="flex justify-center md:justify-end -mt-16">
+                          <div class="w-24 h-24 rounded-full border-2 border-black">
+                            <img class="w-24 h-20 pt-2" src="images/strategy_1.svg">
+                          </div>
+                        </div>
+                        <div>
+                          <h2 class="text-blue-900 text-xl lg:text-2xl font-semibold font-poppins text-center">Strategy and Analysis</h2>
+                          <p class="mt-2 text-md lg:text-md text-black font-poppins text-justify">We define proper strategy in order to build your idea into successful product. 
+                            Defining strategic goals, Information gathering and get qualitative data for the target project
+                            Analysis & Research of System Requirements. Analysis is done on each aspect of the requirement in order to develop perfect product.</p>
+                        </div>
+                      </div>
+                      <div class="col-start-5 col-end-6 md:mx-auto relative mr-2">
+                        <div class="h-full w-6 flex items-center justify-center">
+                          <div class="h-full w-1 bg-blue-900 pointer-events-none"></div>
+                        </div>
+                        <div
+                          class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-900 shadow"
+                        ></div>
+                      </div>
+                    </div>
+                    <!-- right -->
+                    <div class="flex md:contents">
+                      <div class="col-start-5 col-end-6 mr-2 md:mx-auto relative">
+                        <div class="h-full w-6 flex items-center justify-center">
+                          <div class="h-full w-1 bg-blue-900 pointer-events-none"></div>
+                        </div>
+                        <div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-900 shadow"></div>
+                      </div>
+                      <div class="max-w-md py-4 bg-white my-10 lg:my-1 col-start-6 col-end-10 p-4 rounded-xl  shadow-md" data-aos="fade-left" data-aos-duration="3000">
+                        <div class="flex justify-center md:justify-end -mt-16">
+                          <div class="w-24 h-24 rounded-full border-2 border-black">
+                            <img class="w-20 h-20 pt-2" src="images/product_def_t_1.svg">
+                          </div>
+                        </div>
+                        <div>
+                          <h2 class="text-indigo-500 text-xl lg:text-2xl font-semibold text-center font-poppins">Product defination & Spec development</h2>
+                          <p class="mt-2 text-md lg:text-md text-black font-poppins text-justify">Once the phase one is done, the next phase is to certainly represent and document the software requirements and get them accepted from the clients. Here we build Software Requirement Specification document which contains all the product requirements to be constructed and developed during the project life cycle.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- left -->
+                    <div class="flex flex-row-reverse md:contents">
+                      <div class="max-w-md py-4 bg-white my-10 lg:my-1 col-start-1 col-end-5 p-4 rounded-xl shadow-md" data-aos="fade-right" data-aos-duration="3000">
+                        <div class="flex justify-center md:justify-end -mt-16">
+                          <div class="w-24 h-24 rounded-full border-2 border-black">
+                            <img class="w-24 h-20 pt-2" src="images/graphic_t.svg">
+                          </div>
+                        </div>
+                        <div>
+                          <h2 class="text-blue-900 text-xl lg:text-2xl font-semibold text-center font-poppins">UI/UX & Graphic Design</h2>
+                          <p class="mt-2 text-md lg:text-md text-black font-poppins text-justify">Biggest challenge is balancing aesthetics, making sure it’s user-friendly and easy to access to accommodate as many users as possible, regardless of user skill. When we design webpage layouts, we focus primarily on ensuring that they are intuitive, easy to understand and clearly labelled.</p>
+                        </div>
+                      </div>
+                      <div class="col-start-5 col-end-6 md:mx-auto relative mr-2">
+                        <div class="h-full w-6 flex items-center justify-center">
+                          <div class="h-full w-1 bg-blue-900 pointer-events-none"></div>
+                        </div>
+                        <div
+                          class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-900 shadow"
+                        ></div>
+                      </div>
+                    </div>
+                    <!-- right -->
+                    <div class="flex md:contents">
+                      <div class="col-start-5 col-end-6 mr-2 md:mx-auto relative">
+                        <div class="h-full w-6 flex items-center justify-center">
+                          <div class="h-full w-1 bg-blue-900 pointer-events-none"></div>
+                        </div>
+                        <div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-900 shadow">
+                        </div>
+                      </div>
+                      <div class="max-w-md py-4 bg-white my-10 lg:my-1 col-start-6 col-end-10 p-4 rounded-xl shadow-md" data-aos="fade-left" data-aos-duration="3000">
+                        <div class="flex justify-center md:justify-end -mt-16">
+                          <div class="w-24 h-24 rounded-full border-2 border-black">
+                            <img class="w-24 h-20 pt-4" src="images/software_developer_t_1.svg">
+                          </div>
+                         
+                        </div>
+                        <div>
+                          <h2 class="text-indigo-500 text-xl lg:text-2xl font-semibold text-center font-poppins">Software Development</h2>
+                          <p class="mt-2 text-md lg:text-md text-black font-poppins text-justify">We apply unique development skills & create intuitive business app designs by implementing fresh concepts, keeping simplicity, flexibility, and ease of usability in view.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- left -->
+                    <div class="flex flex-row-reverse md:contents">
+                      <div class="max-w-md py-4 bg-white my-10 lg:my-1 col-start-1 col-end-5 p-4 rounded-xl shadow-md" data-aos="fade-right" data-aos-duration="3000">
+                        <div class="flex justify-center md:justify-end -mt-16">
+                          <div class="w-24 h-24 rounded-full border-2 border-black">
+                           <img class="w-28 h-20 pt-3.5" src="images/qa_t_1.svg">
+                          </div>
+                        </div>
+                        <div>
+                          <h2 class="text-blue-900 text-xl lg:text-2xl font-semibold text-center font-poppins">QA and Bug fixing</h2>
+                          <p class="mt-2 text-md lg:text-md text-black font-poppins text-justify">Once the software is complete, and it is deployed in our local server testing environment. The QA team starts testing the functionality of the entire system. This is done to verify the product where product defects are reported, tracked, fixed and retested, until the product reaches the quality standards requirements given by customer.</p>
+                        </div>
+                      </div>
+                      <div class="col-start-5 col-end-6 md:mx-auto relative mr-2">
+                        <div class="h-full w-6 flex items-center justify-center">
+                          <div class="h-full w-1 bg-blue-900 pointer-events-none"></div>
+                        </div>
+                        <div
+                          class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-900 shadow"
+                        ></div>
+                      </div>
+                    </div>
+                    <!-- right -->
+                    <div class="flex md:contents">
+                      <div class="col-start-5 col-end-6 mr-2 md:mx-auto relative">
+                        <div class="h-full w-6 flex items-center justify-center">
+                          <div class="h-full w-1 bg-blue-900 pointer-events-none"></div>
+                        </div>
+                        <div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-900 shadow">
+                        </div>
+                      </div>
+                      <div class="max-w-md py-4 bg-white my-10 lg:my-1 col-start-6 col-end-10 p-4 rounded-xl shadow-md" data-aos="fade-left" data-aos-duration="3000">
+                        <div class="flex justify-center md:justify-end -mt-16">
+                          <div class="w-24 h-24 rounded-full border-2 border-black">
+                            <img class="w-24 h-20 pt-2" src="images/security_11.svg">
+                          </div>
+                          
+                        </div>
+                        <div>
+                          <h2 class="text-indigo-500 text-xl lg:text-2xl font-semibold text-center">Penetration Testing</h2>
+                          <p class="mt-2 text-md lg:text-md text-black font-poppins text-justify">In this phase we will do security testing of application. Here we perform black box and white box both penetration testing methodology and try harder to find vulnerabilities so after deploying the application, we can assure that application is not vulnerable from major OWASP top 10 attack.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- left -->
+                    <div class="flex flex-row-reverse md:contents">
+                      <div class="max-w-md py-4 bg-white my-10 lg:my-1 col-start-1 col-end-5 p-4 rounded-xl shadow-md" data-aos="fade-right" data-aos-duration="3000">
+                        <div class="flex justify-center md:justify-end -mt-16">
+                          <div class="w-24 h-24 rounded-full border-2 border-black">
+                            <img class="w-24 h-24 pt-2 pb-6" src="images/deployment_t_1.svg">
+
+                            </div>
+                        </div>
+                        <div>
+                          <h2 class="text-blue-900 text-xl lg:text-2xl font-semibold text-center font-poppins">Deployment & Maintenance</h2>
+                          <p class="mt-2 text-md lg:text-md text-black font-poppins text-justify">Based on feedbacks from client the product will be deployed for end users. Monitoring the product performance and user experience is equally important for us.</p>
+                        </div>
+                      </div>
+                      <div class="col-start-5 col-end-6 md:mx-auto relative mr-2">
+                        <div class="h-full w-6 flex items-center justify-center">
+                          <div class="h-full w-1 bg-blue-900 pointer-events-none"></div>
+                        </div>
+                        <div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-900 shadow"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--How we works End-->
+
+    <!--Secure contact Section Start -->
+    <section id="secure_contact" class="relative pt-80 pb-2 bg-gray-900">
+      <div class="container mx-auto px-4">
+        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+          <div class="flex flex-wrap mt-12 mb-12 flex-row-reverse sm:flex-row">
+            <div class="w-full sm:w-1/2 p-6 mt-6">
+              <img class="w-full h-full sm:h-64 mx-auto" src="images/web15.svg">
+            </div>
+            <div class="w-full sm:w-1/2 p-6 mt-12">
+              <div class="align-middle">
+                <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3 font-poppins">
+                  We build <span class="text-indigo-600 dark:text-indigo-400">Secured</span> web applications.
+                </h3>
+                <p class="text-gray-600 mb-8 font-semibold text-xl font-poppins">
+                  We would love to help our customer to grow their business at top of their industries.
+                  Get free security penetration testing service from us and make sure that your user's information is on safe hands.
+                  <br />
+                  <br />
+                  <a href="mailto:contact@madhubaninfotech.in" class="relative self-start inline-block w-auto px-8 py-4 mx-auto mt-0 text-base font-bold text-white bg-indigo-600 border-t border-gray-200 rounded-md shadow-xl sm:mt-1 sm\:justify-center fold-bold lg:mx-0" style="background-image: linear-gradient(rgb(74, 74, 190), rgb(179, 91, 241));">
+                    Start project with us
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <div class="flex justify-end w-full max-w-8xl">
+          <img class="-mb-4" src="images/reading.png"/>
+        </div>
+      </div>
+    </section>
+    <!--Secure contact section end -->
+    
+    <!--Footer Part 1 Start-->
+    <footer class="flex justify-center w-full bg-white px-6">
+      <div class=" mt-12 max-w-8xl">
+        <div class="flex flex-col md:flex-row text-center md:text-left">
+          <div class="flex flex-col items-center md:items-start w-full md:w-2/6 border-b pb-8 md:pb-0 md:border-none border-gray-600">
+            <a href="#" class="rounded-full bg-white">
+              <img class="h-24" src="images/madhuban_infotech.png" />
+            </a>
+            <!-- <p class="mt-2 text-3xl lg:text-4xl font-poppins font-bold text-blue-900">Madhuban Info Tech</p> -->
+          </div>
+          <div class="flex flex-col w-full md:w-1/6 md:ml-8">
+            <ul class="footer-ul">
+              <li class="footer-li"><p class="mt-6 md:mt-0 text-3xl font-bold text-black footer-a">Services</p></li>
+              <li class="footer-li"><p class="transition duration-500 ease-in-out pl-5 mt-4 text-md text-black font-bold hover:text-blue-700 transform hover:-translate-y-2 hover:scale-110 footer-a font-mono">Website Design</p></li>
+              <li class="footer-li"><p class="transition duration-500 ease-in-out pl-5 mt-1 text-md text-black font-bold hover:text-blue-700 transform hover:-translate-y-2 hover:scale-110 footer-a font-mono">Web-App Development</p></li>
+              <li class="footer-li"><p class="transition duration-500 ease-in-out pl-5 mt-1 text-md text-black font-bold hover:text-blue-700 transform hover:-translate-y-2 hover:scale-110 footer-a font-mono">Graphic Design</p></li>
+              <li class="footer-li"><p class="transition duration-500 ease-in-out pl-5 mt-1 text-md text-black font-bold hover:text-blue-700 transform hover:-translate-y-2 hover:scale-110 footer-a font-mono">Ios-App Development</p></li>
+              <li class="footer-li"><p class="transition duration-500 ease-in-out pl-5 mt-1 text-md text-black font-bold hover:text-blue-700 transform hover:-translate-y-2 hover:scale-110 footer-a font-mono">Android App Development</p></li>
+              <li class="footer-li"><p class="transition duration-500 ease-in-out pl-5 mt-1 text-md text-black font-bold hover:text-blue-700 transform hover:-translate-y-2 hover:scale-110 footer-a font-mono">Security Testing</p></li>
+              <li class="footer-li"><p class="transition duration-500 ease-in-out pl-5 mt-1 text-md text-black font-bold hover:text-blue-700 transform hover:-translate-y-2 hover:scale-110 footer-a font-mono">Penetration Testing</p></li>
+              <li class="footer-li"><p class="transition duration-500 ease-in-out pl-5 mt-1 text-md text-black font-bold hover:text-blue-700 transform hover:-translate-y-2 hover:scale-110 footer-a font-mono">Web-App Penetration Testing</p></li>
+              <li class="footer-li"><p class="transition duration-500 ease-in-out pl-5 mt-1 text-md text-black font-bold hover:text-blue-700 transform hover:-translate-y-2 hover:scale-110 footer-a font-mono">Ios & Android App Penetration Testing</p></li>
+            </ul>
+          </div>
+          <div class="flex flex-col w-full md:w-1/6 md:ml-8  border-b pb-8 md:pb-0 md:border-none border-gray-600">
+            <ul class="footer-ul">
+              <li class="footer-li"><p class="mt-6 md:mt-0 text-3xl text-black font-bold footer-a">About Us</p></li>
+              <li class="footer-li"><p class="transition duration-500 ease-in-out pl-5 mt-4 text-md text-black font-bold hover:text-blue-700 transform hover:-translate-y-2 hover:scale-110 footer-a font-mono">Blogs</p></li>
+              <li class="footer-li"><a href="#services"><p class="transition duration-500 ease-in-out pl-5 mt-1 text-md text-black font-bold hover:text-blue-700 transform hover:-translate-y-2 hover:scale-110 footer-a font-mono">Services</p></a></li>
+              <li class="footer-li"><p class="transition duration-500 ease-in-out pl-5 mt-1 text-md text-black font-bold hover:text-blue-700 transform hover:-translate-y-2 hover:scale-110 footer-a font-mono">Terms & Privacy</p></li>
+          </ul>
+          </div>
+          <div class="flex flex-col w-full md:w-1/6 md:ml-8">
+            <ul class="footer-ul">
+              <li class="footer-li"><p class="mt-6 md:mt-0 text-3xl text-black font-bold footer-a">Connect with us</p></li>
+              <li class="footer-li"><p class="transition duration-500 ease-in-out pl-5 mt-4 text-md text-black font-bold hover:text-blue-700 transform hover:-translate-y-2 hover:scale-110 footer-a font-mono"> (+91)9737407942</p></i>
+              <li class="footer-li"><a href="mailto:contact@madhubaninfotech.in"><p class="transition duration-500 ease-in-out pl-5 mt-1 text-md text-black font-bold hover:text-blue-700 transform hover:-translate-y-2 hover:scale-110 footer-a font-mono"> contact@madhubaninfotech.in </p></a></i>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-6 flex flex-col md:flex-row items-center justify-between py-4 w-full border-t border-gray-600">
+          <div class="flex text-gray-600">
+            <a class="text-gray-600" href="#">
+              <svg class="h-6 w-6 fill-current" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-285.9 385.7 26.5 22" xml:space="preserve" role="img"><path fill="#8d98a1" d="M-269.3,386c-2.4,0.9-3.9,3.1-3.7,5.6l0.1,0.9l-1-0.1c-3.5-0.4-6.5-2-9.1-4.5l-1.3-1.3l-0.3,0.9c-0.7,2.1-0.2,4.3,1.2,5.7 c0.8,0.8,0.6,0.9-0.7,0.4c-0.5-0.2-0.9-0.3-0.9-0.2c-0.1,0.1,0.3,1.9,0.7,2.6c0.5,1,1.5,1.9,2.6,2.5l0.9,0.4l-1.1,0 c-1.1,0-1.1,0-1,0.4c0.4,1.3,1.9,2.6,3.6,3.2l1.2,0.4l-1,0.6c-1.5,0.9-3.3,1.4-5.1,1.4c-0.9,0-1.6,0.1-1.6,0.2 c0,0.2,2.3,1.3,3.7,1.7c4.1,1.3,8.9,0.7,12.6-1.4c2.6-1.5,5.2-4.6,6.4-7.5c0.7-1.6,1.3-4.4,1.3-5.8c0-0.9,0.1-1,1.1-2.1 c0.6-0.6,1.2-1.3,1.3-1.5c0.2-0.4,0.2-0.4-0.8,0c-1.6,0.6-1.9,0.5-1.1-0.4c0.6-0.6,1.3-1.7,1.3-2.1c0-0.1-0.3,0-0.6,0.2 c-0.3,0.2-1.1,0.5-1.7,0.7l-1,0.3l-0.9-0.6c-0.5-0.3-1.2-0.7-1.6-0.9C-266.9,385.6-268.4,385.7-269.3,386z"></path></svg></a>
+            <a href="#">
+              <svg class="ml-4 h-6 w-6 fill-current" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill="#8d98a1"><path d="M20,3.33355556 C20,1.582 18.4186667,0 16.6666667,0 L3.33333333,0 C1.58133333,0 0,1.582 0,3.33355556 L0,16.6664444 C0,18.418 1.58133333,20 3.33355556,20 L10,20 L10,12.4444444 L7.55555556,12.4444444 L7.55555556,9.11111111 L10,9.11111111 L10,7.81244444 C10,5.57266667 11.6817778,3.55555556 13.75,3.55555556 L16.4444444,3.55555556 L16.4444444,6.88888889 L13.75,6.88888889 C13.4551111,6.88888889 13.1111111,7.24688889 13.1111111,7.78311111 L13.1111111,9.11111111 L16.4444444,9.11111111 L16.4444444,12.4444444 L13.1111111,12.4444444 L13.1111111,20 L16.6666667,20 C18.4186667,20 20,18.418 20,16.6664444 L20,3.33355556 Z"></path></g></g></svg>
+            </a>
+            <a href="#">
+              <svg class="ml-4 h-6 w-6 fill-current" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill="#8d98a1"><path d="M10.7358299,9.05316505 C10.74693,9.03496505 10.7625302,9.01306505 10.7778304,8.99176505 L10.7778304,9.05316505 L10.7358299,9.05316505 Z M16.9563347,16.7413593 L13.9355007,16.7413593 L13.9355007,11.9100805 C13.9355007,10.696181 13.4977552,9.86785022 12.4052981,9.86785022 C11.5695643,9.86785022 11.0734621,10.4266736 10.8556124,10.9662 C10.7748894,11.1588913 10.7548946,11.4283987 10.7548946,11.6975342 L10.7548946,16.7411734 L7.73457208,16.7411734 C7.73457208,16.7411734 7.77409657,8.5583491 7.73457208,7.71146523 L10.7553596,7.71146523 L10.7553596,8.99162555 C11.1563705,8.37649203 11.8729729,7.4990119 13.477156,7.4990119 C15.4654707,7.4990119 16.9563347,8.78884399 16.9563347,11.5636639 L16.9563347,16.7413593 Z M4.55280357,6.47798976 L4.53248332,6.47798976 C3.51912172,6.47798976 2.86222458,5.78497064 2.86222458,4.91734826 C2.86222458,4.03224231 3.53841897,3.35800873 4.57186832,3.35800873 C5.60541067,3.35800873 6.24115058,4.03205632 6.26123833,4.91734826 C6.26123833,5.78515663 5.60564317,6.47798976 4.55280357,6.47798976 Z M3.0415728,16.7413593 L6.06342984,16.7413593 L6.06342984,7.71160472 L3.0415728,7.71160472 L3.0415728,16.7413593 Z M18.5232253,0 L1.4777512,0 C0.661547082,0 0,0.641358883 0,1.43295561 L0,18.5664399 C0,19.3580366 0.661779579,20 1.4777512,20 L18.5232253,20 C19.3391969,20 20,19.3576181 20,18.5664399 L20,1.43295561 C20,0.641591377 19.3391969,0 18.5232253,0 Z"></path></g></g></svg>
+            </a>
+          </div>
+          <div class="flex flex-col md:flex-row text-center text-gray-600">
+            <img class="hidden md:block h-4" src="images/madhuvan_logo.png"/>
+            <p class="mt-4 md:mt-0 ml-2 text-sm text-gray-400 font-poppins">Design by Madhuban Info Tech.</p>
+            <p class="mt-4 md:mt-0 ml-2 text-sm font-light font-poppins">© 2021 Madhuban Info Tech</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!--Footer Part 1 End-->
+    <!-- a little JS for the mobile nav button -->
+    <script type="text/javascript">
+      function changeAtiveTab(event,tabID){
+        let element = event.target;
+        while(element.nodeName !== "A"){
+          element = element.parentNode;
+        }
+        ulElement = element.parentNode.parentNode;
+        aElements = ulElement.querySelectorAll("li > a");
+        tabContents = document.getElementById("tabs-id").querySelectorAll(".tab-content > div");
+        for(let i = 0 ; i < aElements.length; i++){
+          aElements[i].classList.remove("text-white");
+          aElements[i].classList.remove("bg-purple-600");
+          aElements[i].classList.add("text-white-600");
+          aElements[i].classList.add("bg-white");
+          tabContents[i].classList.add("hidden");
+          tabContents[i].classList.remove("block");
+        }
+        element.classList.remove("text-black-600");
+        element.classList.remove("bg-white");
+        element.classList.add("text-white");
+        element.classList.add("bg-purple-600");
+        document.getElementById(tabID).classList.remove("hidden");
+        document.getElementById(tabID).classList.add("block");
+      }
+    </script>
+    <script>
+      AOS.init({
+        duration: 1000
+      });
+      if (document.getElementById('nav-mobile-btn')) {
+        document.getElementById('nav-mobile-btn').addEventListener('click', function () {
+          if (this.classList.contains('close')) {
+            document.getElementById('nav').classList.add('hidden');
+            this.classList.remove('close');
+          } else {
+            document.getElementById('nav').classList.remove('hidden');
+            this.classList.add('close');
+          }
+        });
+      }
+    </script>
+    <script>
+      //Get the button
+      var mybutton = document.getElementById("myBtn");
+      
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function() {scrollFunction()};
+      
+      function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          mybutton.style.display = "block";
+          mybutton.style.position = "fixed";
+          mybutton.style.bottom = "20px";
+          mybutton.style.right = "12px";
+          mybutton.style.padding = "6px";
+          mybutton.style.opacity = "0.5";
+        } else {
+          mybutton.style.display = "none";
+        }
+      }
+      
+      // When the user clicks on the button, scroll to the top of the document
+      function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
+    </script>
+    
+    <script src="./assets/jquery/jquery.min.js"></script>
+    <script src="./assets/aos.js"></script>
+  </body>
+</html>
